@@ -18,7 +18,7 @@ def main():
     phrase = args.frase if args.frase is not None else input("Frase: ")
 
     data_dir = Path(__file__).resolve().parent.parent / "data"
-    data_files = ("database.json", "vocab.json", "invariables.json")
+    data_files = ("index.json", "vocab.json", "invariables.json")
     missing_files = [
         name
         for name in data_files

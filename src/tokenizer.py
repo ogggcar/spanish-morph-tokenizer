@@ -25,7 +25,7 @@ class MorphTokenizer:
 
         self.BASE_DIR = Path(__file__).resolve().parent.parent / "data"
 
-        self.pre_vocab = load_json(self.BASE_DIR / "database.json")
+        self.pre_vocab = load_json(self.BASE_DIR / "index.json")
 
         try:
             self.vocab = load_json(self.BASE_DIR / "vocab.json")
@@ -55,10 +55,10 @@ class MorphTokenizer:
     'sub', 'so', 'super', 'sobre', 'supra', 'trans', 'tras', 'tele', 'tri', 'tetra', 'pluri', 'poli', 'semi', 'uni', 'ultra', 'vice', "un", "duo", "penta", "hexa",
     "hepta", "octo", "nona"])
         
-    def add_invariables_to_database(self):
+    def add_invariables_to_index(self):
         """
         Añade las palabras invariables al pre-vocabulario
-        y guarda el database.json en el directorio del tokenizer.
+        y guarda el index.json en el directorio del tokenizer.
         """
         for word in self.invariables:
             if word not in self.pre_vocab:
@@ -66,7 +66,7 @@ class MorphTokenizer:
 
         dump_json(
             self.pre_vocab,
-            self.BASE_DIR / "database.json"
+            self.BASE_DIR / "index.json"
         )
 
     def is_valid_token(self, token):

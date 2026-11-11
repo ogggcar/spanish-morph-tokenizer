@@ -1,43 +1,62 @@
-# Spanish Morph Tokenizer
+# Segmentador morfológico del español
 
-Tokenizador morfológico para español de la tesis doctoral de Óscar García Sierra.
+Este repositorio corresponde al **capítulo 10 de la tesis doctoral de Óscar
+García Sierra** y contiene el segmentador morfológico final para español,
+preparado para su uso en inferencia. Se relaciona con el artículo
+[publicado en Dialnet](https://dialnet.unirioja.es/servlet/articulo?codigo=10413927).
 
-Este repositorio NO contiene el algoritmo de construcción del índice/database, solamente el tokenizador final para la inferencia.
+## Objetivo del estudio
 
-El segmentador funciona solo con minúsculas.
+Proporcionar el segmentador morfológico final descrito en el capítulo 10 y los
+archivos que necesita para segmentar texto en español. En esta versión se
+publica el segmentador y sus recursos de ejecución; no se incluyen los
+conjuntos de datos ni los resultados de evaluación del capítulo.
 
-## Requisitos
+## Procedimiento de uso
 
-- Python 3.10 o posterior
-- [uv](https://docs.astral.sh/uv/)
+1. Instalar las dependencias con `uv sync`.
+2. Cargar el índice morfológico, el vocabulario y las palabras invariables
+   desde `data/`.
+3. Pasar una frase en minúsculas al segmentador. El procesamiento conserva la
+   distinción entre mayúsculas y minúsculas.
 
-## Configuración
+Los tres recursos de ejecución son:
 
-```bash
-uv sync
-```
+- [Índice morfológico (`data/index.json`)](data/index.json)
+- [Vocabulario (`data/vocab.json`)](data/vocab.json)
+- [Palabras invariables (`data/invariables.json`)](data/invariables.json)
 
-`uv sync` crea el entorno virtual del proyecto e instala sus dependencias. Para
-usar el módulo dentro del entorno:
-
-```bash
-uv run python -c "from tokenizer import MorphTokenizer"
-```
-
-La clase `MorphTokenizer` carga `database.json`, `vocab.json` e
-`invariables.json` desde el directorio `data/` de la raíz del proyecto.
-
-## Ejemplo de uso
-
-Con los archivos de datos requeridos en `data/`, puedes segmentar una frase
-desde la consola:
+Para segmentar una frase desde la consola:
 
 ```bash
 uv run python src/test_tokenizer.py "los gatos corren rápidamente."
 ```
 
-Si omites la frase, el programa la solicitará de forma interactiva:
+También se puede usar la clase `MorphTokenizer` desde Python:
 
-```bash
-uv run python src/test_tokenizer.py
+```python
+from tokenizer import MorphTokenizer
+
+tokenizer = MorphTokenizer()
+tokens = tokenizer.tokenize("los gatos corren rápidamente.")
+print(tokens)
 ```
+
+## Estructura del repositorio
+
+```text
+data/
+  index.json        Índice morfológico usado por el segmentador
+  vocab.json        Vocabulario y correspondencia con los identificadores
+  invariables.json  Palabras que se incorporan sin segmentación
+src/
+  tokenizer.py      Implementación del segmentador
+  test_tokenizer.py Interfaz de prueba por consola
+```
+
+## Evaluación y errores
+
+Los conjuntos de datos de evaluación, los resultados desglosados y agregados,
+y los archivos de errores empleados para el análisis **no forman parte de esta
+versión del repositorio**. Se incorporarán y documentarán aquí cuando se
+publique el material de evaluación del capítulo 10.
