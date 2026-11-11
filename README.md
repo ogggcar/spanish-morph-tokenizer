@@ -28,3 +28,15 @@ incluidos en este repositorio.
 
 ## Ejemplo de uso
 
+Con los archivos de datos requeridos en `src`, puedes segmentar una frase
+desde la consola:
+
+```bash
+uv run python src/test_tokenizer.py "Los gatos corren rápidamente."
+```
+
+Si omites la frase, el programa la solicitará de forma interactiva:
+
+```bash
+uv run python src/test_tokenizer.py
+```
