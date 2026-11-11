@@ -23,7 +23,7 @@ class MorphTokenizer:
     
     def __init__(self, vocab_size=31000):  # Tamaño de vocabulario configurable
 
-        self.BASE_DIR = Path(__file__).resolve().parent
+        self.BASE_DIR = Path(__file__).resolve().parent.parent / "data"
 
         self.pre_vocab = load_json(self.BASE_DIR / "database.json")
 
@@ -186,11 +186,9 @@ class MorphTokenizer:
         # --------------------------------------------------------
         # 9. Guardar vocabulario
         # --------------------------------------------------------
-        BASE_DIR = Path(__file__).resolve().parent
-
         dump_json(
             vocab,
-            BASE_DIR / "vocab.json"
+            self.BASE_DIR / "vocab.json"
         )
 
         self.vocab = vocab
