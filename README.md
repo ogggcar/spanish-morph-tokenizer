@@ -25,8 +25,7 @@ conjuntos de datos ni los resultados de evaluación del artículo.
 ## Procedimiento de uso
 
 1. Instalar las dependencias con `uv sync`.
-2. Cargar el índice morfológico, el vocabulario y las palabras invariables
-   desde `data/`.
+2. Cargar el índice morfológico, el vocabulario desde `data/`.
 3. Pasar una frase en minúsculas al segmentador. El procesamiento conserva la
    distinción entre mayúsculas y minúsculas.
 
@@ -34,7 +33,6 @@ Los tres recursos de ejecución son:
 
 - [Índice morfológico (`data/index.json`)](data/index.json)
 - [Vocabulario (`data/vocab.json`)](data/vocab.json)
-- [Palabras invariables (`data/invariables.json`)](data/invariables.json)
 
 Para segmentar una frase desde la consola:
 
@@ -57,8 +55,7 @@ print(tokens)
 ```text
 data/
   index.json        Índice morfológico usado por el segmentador
-  vocab.json        Vocabulario y correspondencia con los identificadores
-  invariables.json  Palabras que se incorporan sin segmentación
+  vocab.json        Vocabulario
 src/
   tokenizer.py      Implementación del segmentador
   test_tokenizer.py Interfaz de prueba por consola
