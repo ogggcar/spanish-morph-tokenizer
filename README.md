@@ -1,16 +1,26 @@
 # Segmentador morfológico del español
 
-Este repositorio corresponde al **capítulo 10 de la tesis doctoral de Óscar
-García Sierra** y contiene el segmentador morfológico final para español,
-preparado para su uso en inferencia. Se relaciona con el artículo
-[publicado en Dialnet](https://dialnet.unirioja.es/servlet/articulo?codigo=10413927).
+Este repositorio acompaña el artículo
+[«Un Segmentador Morfológico para la Generación de los Vocabularios de Grandes
+Modelos de Lenguaje en Español»](articulo_construccion_segmentador.pdf), de
+Óscar García-Sierra, Ana Fernández-Pampillón Cesteros y Miguel Ortega-Martín.
+Incluye el segmentador morfológico final descrito en el artículo, preparado
+para su uso en inferencia y en la generación de vocabularios para modelos de
+lenguaje.
 
 ## Objetivo del estudio
 
-Proporcionar el segmentador morfológico final descrito en el capítulo 10 y los
-archivos que necesita para segmentar texto en español. En esta versión se
-publica el segmentador y sus recursos de ejecución; no se incluyen los
-conjuntos de datos ni los resultados de evaluación del capítulo.
+El segmentador busca cada palabra en un índice palabra-morfemas y aplica
+reglas morfológicas cuando no la encuentra, como describe el artículo. Este
+repositorio incluye el índice ya preparado (`data/index.json`) y los demás
+recursos necesarios para ejecutar el segmentador, pero **no incluye el proceso
+de construcción ni de segmentación de ese índice**. Tampoco incluye los
+conjuntos de datos ni los resultados de evaluación del artículo.
+
+## Requisitos
+
+- Python 3.10 o posterior
+- [uv](https://docs.astral.sh/uv/)
 
 ## Procedimiento de uso
 
@@ -58,5 +68,4 @@ src/
 
 Los conjuntos de datos de evaluación, los resultados desglosados y agregados,
 y los archivos de errores empleados para el análisis **no forman parte de esta
-versión del repositorio**. Se incorporarán y documentarán aquí cuando se
-publique el material de evaluación del capítulo 10.
+versión del repositorio**.
