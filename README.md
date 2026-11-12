@@ -8,6 +8,10 @@ Incluye el segmentador morfológico final descrito en el artículo, preparado
 para su uso en inferencia y en la generación de vocabularios para modelos de
 lenguaje.
 
+Las 49 condiciones morfológicas del segmentador se documentan en
+[reglas_segmentador.yaml](reglas_segmentador.yaml). El fallback final que
+segmenta por caracteres se describe aparte y no forma parte de ese recuento.
+
 ## Objetivo del estudio
 
 El segmentador busca cada palabra en un índice palabra-morfemas y aplica
@@ -56,6 +60,8 @@ print(tokens)
 data/
   index.json        Índice morfológico usado por el segmentador
   vocab.json        Vocabulario
+reglas_segmentador.yaml
+                  Condiciones morfológicas de MorphTokenizer.tokenize
 src/
   tokenizer.py      Implementación del segmentador
   test_tokenizer.py Interfaz de prueba por consola
