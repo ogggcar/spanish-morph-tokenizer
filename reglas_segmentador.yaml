@@ -7,202 +7,152 @@ criterio_de_conteo: >-
   aplica ninguna regla, se documenta aparte y no cuenta como regla morfológica.
 reglas:
   - id: R01
-    linea: 426
     condicion: "token.endswith('s') and token[:-1] in self.pre_vocab"
     accion: "Segmenta la base del índice y añade ##s."
   - id: R02
-    linea: 430
     condicion: "token.endswith('as') and (token[:-2] in self.pre_vocab or token[:-2]+'o' in self.pre_vocab)"
     accion: "Analiza el plural femenino -as usando la base o su variante masculina en -o."
   - id: R03
-    linea: 431
     condicion: "token[:-2] in self.pre_vocab and token[-3] != 'd'"
     accion: "Si existe la base y no termina en d, añade ##a y ##s."
   - id: R04
-    linea: 435
     condicion: "token[:-2]+'o' in self.pre_vocab"
     accion: "Usa la variante masculina en -o, la recorta y añade ##a y ##s."
   - id: R05
-    linea: 439
     condicion: "token.endswith('onas') and token[:-4]+'ón' in self.pre_vocab"
     accion: "Usa la base en -ón y añade ##on, ##a y ##s."
   - id: R06
-    linea: 446
     condicion: "token.endswith('sas')"
     accion: "Intenta reconstruir la base con tilde; si no resulta, usa la base sin -sas."
   - id: R07
-    linea: 448
     condicion: "len(tokens) > 0"
     accion: "Si la reconstrucción anterior tuvo éxito, añade ##a y ##s."
   - id: R08
-    linea: 451
     condicion: "len(tokens) == 0"
     accion: "Si no hubo reconstrucción, busca la base sin -sas y añade ##sa y ##s."
   - id: R09
-    linea: 457
     condicion: "token.endswith('es')"
     accion: "Inicia el análisis del plural terminado en -es."
   - id: R10
-    linea: 458
     condicion: "token[:-2] in self.pre_vocab"
     accion: "Usa la base del índice y añade ##es."
   - id: R11
-    linea: 462
     condicion: "token[:-2].endswith('c') and token[:-3]+'z' in self.pre_vocab"
     accion: "Recupera la base escrita con z, cambia la z final por c y añade ##es."
   - id: R12
-    linea: 468
     condicion: "len(tokens) > 0"
     accion: "Si add_tildes reconstruye la base, añade ##es."
   - id: R13
-    linea: 472
     condicion: "len(tokens) > 0"
     accion: "Si remove_tildes reconstruye la base, añade ##es."
   - id: R14
-    linea: 475
     condicion: "token.endswith('a') and (token[:-1] in self.pre_vocab or token[:-1]+'o' in self.pre_vocab or token[:-1]+'e' in self.pre_vocab)"
     accion: "Analiza el femenino -a cuando existe la base, su variante en -o o su variante en -e."
   - id: R15
-    linea: 476
     condicion: "token[:-1]+'o' in self.pre_vocab"
     accion: "Usa la variante en -o sin su último token y añade ##a."
   - id: R16
-    linea: 479
     condicion: "token[:-1] in self.pre_vocab"
     accion: "Usa la base del índice y añade ##a."
   - id: R17
-    linea: 482
     condicion: "token[:-1]+'e' in self.pre_vocab"
     accion: "Usa la variante en -e sin su último token y añade ##a."
   - id: R18
-    linea: 486
     condicion: "token.endswith('ona') and token[:-3]+'ón' in self.pre_vocab"
     accion: "Usa la base en -ón y añade ##on y ##a."
   - id: R19
-    linea: 491
     condicion: "token.endswith('sa')"
     accion: "Intenta reconstruir la base con tilde; si no resulta, usa la base sin -sa."
   - id: R20
-    linea: 493
     condicion: "len(tokens) > 0"
     accion: "Si add_tildes reconstruye la base, añade ##a."
   - id: R21
-    linea: 495
     condicion: "len(tokens) == 0"
     accion: "Si no hubo reconstrucción, busca la base sin -sa y añade ##sa."
   - id: R22
-    linea: 499
     condicion: "token.endswith('mente') and token[:-5] in self.pre_vocab and token[-6] != 'a'"
     accion: "Usa la base del índice y añade ##mente si el carácter anterior a -mente no es a."
   - id: R23
-    linea: 504
     condicion: "token.endswith('mente') and token[-6] == 'a' and token[:-6]+'o' in self.pre_vocab"
     accion: "Usa la base en -o sin su último token y añade ##a y ##mente."
   - id: R24
-    linea: 509
     condicion: "token.endswith('mente') and token[-6] == 'a' and token[:-6] in self.pre_vocab"
     accion: "Usa la base sin la a final y añade ##mente."
   - id: R25
-    linea: 515
     condicion: "((token.endswith('la') or token.endswith('lo')) and token[-3] != 'l') or ((token.endswith('las') or token.endswith('los')) and token[-4] != 'l')"
     accion: "Detecta los enclíticos -la/-lo/-las/-los, evitando el caso de l duplicada."
   - id: R26
-    linea: 517
     condicion: "not token.endswith('s')"
     accion: "Selecciona la ruta de enclítico singular."
   - id: R27
-    linea: 518
     condicion: "not token[:-2].endswith('se')"
     accion: "Trata el enclítico sin -se previo: busca la base o intenta reconstruirla con tilde."
   - id: R28
-    linea: 526
     condicion: "len(tokens) > 0"
     accion: "Si la reconstrucción con tilde tuvo éxito, añade el enclítico detectado."
   - id: R29
-    linea: 531
     condicion: "token[:-2].endswith('se')"
     accion: "Detecta el caso con -se antes del enclítico singular."
   - id: R30
-    linea: 533
     condicion: "len(tokens) > 0"
     accion: "Si se reconstruye la base anterior a -se, añade ##se y el enclítico."
   - id: R31
-    linea: 538
     condicion: "not token[:-3].endswith('se')"
     accion: "Trata el enclítico plural sin -se previo: busca la base o intenta reconstruirla con tilde."
   - id: R32
-    linea: 545
     condicion: "len(tokens) > 0"
     accion: "Si la reconstrucción con tilde tuvo éxito, añade el enclítico plural."
   - id: R33
-    linea: 549
     condicion: "token[:-3].endswith('se')"
     accion: "Detecta el caso con -se antes del enclítico plural."
   - id: R34
-    linea: 551
     condicion: "len(tokens) > 0"
     accion: "Si se reconstruye la base anterior a -se, añade ##se y el enclítico plural."
   - id: R35
-    linea: 555
     condicion: "token.endswith('les') or token.endswith('nos')"
     accion: "Detecta los enclíticos -les y -nos."
   - id: R36
-    linea: 561
     condicion: "len(tokens) > 0"
     accion: "Si se reconstruye la base del índice o con tilde, añade el enclítico."
   - id: R37
-    linea: 565
     condicion: "token.endswith('le') or token.endswith('os') or token.endswith('me') or token.endswith('te') or token.endswith('se')"
     accion: "Detecta los enclíticos -le, -os, -me, -te y -se."
   - id: R38
-    linea: 571
     condicion: "len(tokens) > 0"
     accion: "Si se reconstruye la base del índice o con tilde, añade el enclítico."
   - id: R39
-    linea: 580
     condicion: "suffix in token[-5:]"
     accion: "Busca en los últimos cinco caracteres los sufijos it, ill, ic, in, ín, ísim, ot y et."
   - id: R40
-    linea: 585
     condicion: "tokens[-1] == '##as'"
     accion: "Normaliza el último subtoken ##as en ##a y ##s."
   - id: R41
-    linea: 592
     condicion: "type(tokens) == type(None) or len(tokens) == 0"
     accion: "Inicia el análisis por prefijos si aún no hay segmentación."
   - id: R42
-    linea: 595
     condicion: "token.startswith(prefix)"
     accion: "Comprueba si la palabra original empieza por un prefijo del inventario."
   - id: R43
-    linea: 597
     condicion: "remaining in self.pre_vocab"
     accion: "Acepta el prefijo si el resto de la palabra está en el índice."
   - id: R44
-    linea: 606
     condicion: "(type(tokens) == type(None) or len(tokens) == 0) and token.endswith('s')"
     accion: "Si no hubo segmentación y la palabra termina en s, inicia el análisis del prefijo sin esa s."
   - id: R45
-    linea: 609
     condicion: "token_without_s.startswith(prefix)"
     accion: "Comprueba si la forma sin s empieza por un prefijo del inventario."
   - id: R46
-    linea: 611
     condicion: "remaining in self.pre_vocab"
     accion: "Acepta el prefijo si el resto de la forma sin s está en el índice."
   - id: R47
-    linea: 620
     condicion: "(type(tokens) == type(None) or len(tokens) == 0) and token.endswith('a')"
     accion: "Si no hubo segmentación y la palabra termina en a, inicia el análisis de prefijo probando la forma en -o."
   - id: R48
-    linea: 623
     condicion: "token_with_o.startswith(prefix)"
     accion: "Comprueba si la forma modificada a -o empieza por un prefijo del inventario."
   - id: R49
-    linea: 625
     condicion: "remaining in self.pre_vocab"
     accion: "Acepta el prefijo si el resto de la forma modificada está en el índice."
 fallback_no_morfologico:
-  linea: 633
   condicion: "type(tokens) == type(None) or len(tokens) == 0"
   accion: "Divide la palabra en caracteres y antepone ## a todos salvo al primero."
